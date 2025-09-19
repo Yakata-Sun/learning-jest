@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jest Тренажер</title>
+   <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <h1>🧪 Jest Тренажер</h1>
+            <div>Изучение тестирования шаг за шагом</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="nav">
+            <div class="nav-items" id="navItems"></div>
+        </div>
+
+        <div class="content" id="content"></div>
+
+        <div class="floating-actions">
+            <button class="fab" onclick="showHints()" title="Подсказки">💡</button>
+            <button class="fab" onclick="resetProgress()" title="Сброс прогресса">🔄</button>
+        </div>
+
+        <div class="modal" id="modal">
+            <div class="modal-content" id="modalContent"></div>
+        </div>
+    </div>
+    <script src="./src/main.js"></script>
+</body>
+</html>
