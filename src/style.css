@@ -122,8 +122,11 @@
                       padding-top: 0.5rem;
         }
 
-  .lesson.active ul li {
+  .lesson.active ul {
            list-style-type: decimal;
+        }
+        .lesson.active ul .mat {
+           list-style-type:circle;
         }
         
         @keyframes fadeIn {
