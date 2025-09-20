@@ -162,11 +162,51 @@ test('multiply 3 * 4 to equal 12', () => {
 
   {
     id: 'matchers',
-    title: '3. Матчеры',
+    title: '3. Матчеры Jest',
     description: 'Различные виды проверок',
     content: {
-      theory: `Jest предоставляет множество матчеров для разных типов проверок: 
-                    toBe, toEqual, toBeNull, toBeTruthy, toHaveLength, toContain и другие.`,
+      theory: `<p>Mатчер (matcher) — набор правил, которые говорят Jest, как сравнить ожидаемое и реальное значение.</p>
+      Jest предоставляет множество матчеров для разных типов проверок.
+                    
+                    <h3>Советы по выбору матчеров:</h3>
+                    <ul>
+                   <li><strong>Для примитивов и строгой равности</strong> - чаще используйте toBe</li>
+                   <li><strong>Для объектов/массивов</strong> -  — toEqual</li>
+                   <li><strong>Чтобы проверить вызовы моков</strong>: — toHaveBeenCalled и toHaveBeenCalledWith</li>
+                   <li><strong>Для ошибок</strong>: — toThrow/toThrowError</li>
+                   <li><strong>Для асинхронного кода</strong>: — возвращайте промисы и используйте async/await в тестах</li>
+                   </ul>
+
+                  <h3>Матчеры Jest для проверки чисел и строк</h3>
+                  
+                  <ul class="mat">
+                  <li><b>toBe(value)</b> — строгая равность (===).</br>
+Пример: expect(2 + 2).toBe(4)</li>
+                  <li><b>toEqual(value)</b> — глубокое сравнение объектов/массивов.</br>
+Пример: expect({ a: 1 }).toEqual({ a: 1 })</li>
+                  <li><b>toBeNull()</b> — проверить на null</li>
+                  <li><b>toBeUndefined()</b> — проверить на undefined</li>
+                  <li><b>toBeTruthy() / toBeFalsy()</b> — проверить, приводится ли к true/false в логическом контексте.</li>
+                  <li><b>toContain(item)</b> — проверить, содержит ли массив или строка элемент/подстроку.</br>
+Пример: expect([1,2,3]).toContain(2)</br>
+Пример: expect('abc').toContain('b')</li>
+                  <li><b>toHaveLength(n)</b> — проверить длину массива/строки.</br>
+Пример: expect([1,2,3]).toHaveLength(3)</li>
+                  </ul>
+
+                  <h3>Матчеры Jest для проверки функций и вызовов</h3>
+                  
+                  <ul class="mat">
+                  <li><b>toHaveBeenCalled()</b> — проверить, что функция-мок была вызвана.</br>
+Пример: expect(someFunc).toHaveBeenCalled()</li>
+                  <li><b>toHaveBeenCalledTimes(n)</b> — сколько раз вызвана.</br>
+Пример: expect(someFunc).toHaveBeenCalledTimes(2)</li>
+                  <li><b>toHaveBeenCalledWith(...args)</b> — проверить, что вызывалась с такими аргументами.</li>
+                  <li><b>toHaveBeenLastCalledWith(...args)</b> — последний вызов с такими аргументами.</li>
+                  <li><b>toHaveReturned() / toHaveReturnedTimes(n)</b> — проверить возвращение значения.</li>
+                  <li><b>toHaveLastReturnedWith(value)</b> — последнее возвращаемое значение.
+                  </ul>
+                  `,
 
       example: `test('different matchers', () => {
   expect(2 + 2).toBe(4);                    // точное равенство
