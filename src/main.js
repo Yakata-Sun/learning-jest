@@ -206,15 +206,65 @@ test('multiply 3 * 4 to equal 12', () => {
                   <li><b>toHaveReturned() / toHaveReturnedTimes(n)</b> — проверить возвращение значения.</li>
                   <li><b>toHaveLastReturnedWith(value)</b> — последнее возвращаемое значение.
                   </ul>
+
+<h3>Специализированные matcher’ы </h3>
+<ul class="mat">
+                  <li><b>toThrow() / toThrowError()</b> — проверить, что функция выбрасывает исключение.</br>
+Пример: expect(() => { throw new Error('oops') }).toThrow('oops')</li>
+                  <li><b>toMatch(regexp)</b> — для строк, проверить соответствие регулярному выражению.</br></li>
+                  <li><b>toBeLessThan(n) / toBeGreaterThan(n)</b> числовые сравнения.</li>
+                  <li><b>toBeCloseTo(number, digits?)</b> — сравнение чисел с учётом погрешности.</li>
+                  </ul>
+
+<h3>Способы расширения матчеров</h3>
+
+<p>Можно добавлять свои матчеры через расширение expect:</p>
+ <span class="code-exp">
+ expect.extend({</br>
+  toBeDivisibleBy(received, argument) {</br>
+    const pass = received % argument === 0;</br>
+    if (pass) {</br>
+      return { message: () => \`expected \${received} not to be divisible by \${argument}\`, pass: true };</br>
+    } else {</br>
+      return { message: () => \`expected \${received} to be divisible by \${argument}\`, pass: false };</br>
+    }}</br>
+});</br>
+
+// использование</br>
+expect(6).toBeDivisibleBy(3); // true</br>
+expect(6).not.toBeDivisibleBy(3); // false</br>
+</span>
                   `,
 
-      example: `test('different matchers', () => {
-  expect(2 + 2).toBe(4);                    // точное равенство
-  expect({name: 'John'}).toEqual({name: 'John'}); // глубокое равенство
-  expect('hello world').toContain('world');  // содержание
-  expect([1,2,3]).toHaveLength(3);          // длина массива
-  expect(null).toBeNull();                  // проверка на null
-  expect('test').toBeTruthy();              // проверка на истинность
+      example: `test('different matchers', () => {</br>
+  expect(2 + 2).toBe(4);                    // проверка примитивов, точное равенство </br></br>
+
+  expect({name: 'John'}).toEqual({name: 'John'}); </br>
+  const a = { x: 1, y: 2 };</br>
+  const b = { x: 1, y: 2 };</br>
+  expect(a).toEqual(b); // глубокое сравнение объектов </br></br>
+
+  expect('hello world').toContain('world');  // проверка на содержание </br></br>  
+
+  expect('test').toBeTruthy();              // проверка на истинность</br></br>  
+
+  test('мок функция вызывается и получает аргументы', () => {</br>
+  const fn = jest.fn();</br>
+  fn(10, 'test');</br>
+  expect(fn).toHaveBeenCalled();</br>
+  expect(fn).toHaveBeenCalledWith(10, 'test');</br>
+  expect(fn).toHaveBeenCalledTimes(1);</br>
+}); </br></br>
+
+// __mocks__/module.js</br>
+export const foo = jest.fn().mockReturnValue(42);</br>
+jest.mock('../module'); // подвязать мок</br>
+import { foo } from '../module';</br>
+test('мок возвращает 42', () => {</br>
+  expect(foo()).toBe(42);</br>
+});</br></br>
+
+
 });`,
 
       task: {
@@ -813,7 +863,7 @@ function showLesson(index) {
                     <div>
                         <p style="line-height: 1.6; margin-bottom: 20px;">${lesson.content.theory}</p>
                         
-                        <h3>💡 Пример</h3>
+                        <h3>💡 Примеры</h3>
                         <div class="code-example">${lesson.content.example}</div>
                         
                         <div class="task">
